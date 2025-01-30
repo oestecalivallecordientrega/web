@@ -396,12 +396,16 @@ window.onload = function() {
 };
 
 function searchContacts() {
-    const input = document.getElementById('searchContactInput').value.toLowerCase();
+    const input = document.getElementById('searchContactInput').value.toLowerCase().trim();
     const rows = document.querySelectorAll("table tbody tr");
 
     rows.forEach(row => {
-        const name = row.querySelector("td a").textContent.toLowerCase();
-        row.style.display = name.includes(input) ? "" : "none";
+        const nameElement = row.querySelector("td a"); // Buscar el <a> dentro del <td>
+        
+        if (nameElement) {
+            const name = nameElement.textContent.toLowerCase();
+            row.style.display = name.includes(input) ? "" : "none"; // Mostrar u ocultar filas
+        }
     });
 }
 
