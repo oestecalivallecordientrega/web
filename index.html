@@ -235,6 +235,35 @@
         <img class="modal-content" id="expandedImage">
     </div>
 
+    </div> <!-- Cierre del container -->
+
+    <footer style="text-align: center; margin-top: 30px; padding: 20px; color: #666; font-size: 0.9em;">
+        <div id="colombiaTime" style="margin-bottom: 10px;">
+            <span id="currentDate"></span> - 
+            <span id="currentTime"></span> (Hora Colombia)
+        </div>
+        
+        <div style="margin-bottom: 5px;">
+            Contraentrega © Todos los derechos reservados
+        </div>
+        
+        <div style="margin-top: 10px;">
+            <a href="#" style="color: #2c3e50; text-decoration: none; margin: 0 10px;"
+               onmouseover="this.style.textDecoration='underline'" 
+               onmouseout="this.style.textDecoration='none'">
+                Políticas de la empresa
+            </a>
+            
+            <a href="https://strike.me/es/colombia/" 
+               target="_blank"
+               style="color: #4CAF50; text-decoration: none; margin: 0 10px;"
+               onmouseover="this.style.textDecoration='underline'" 
+               onmouseout="this.style.textDecoration='none'">
+                Recargar saldo Lightning con COP
+            </a>
+        </div>
+    </footer>
+
     <script>
         const products = [
             { id: 1, sku: "@oestecalivalle1", name: "Local Contraentrega sector tertulia oeste cali valle del cauca", price: 10000, inventory: 1000, image: "oestecalivalle1.jpg" },
@@ -389,6 +418,30 @@
         });
 
         renderProducts();
+
+ // Función para actualizar fecha y hora de Colombia
+        function updateColombiaTime() {
+            const options = {
+                timeZone: 'America/Bogota',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            
+            const now = new Date();
+            document.getElementById('currentDate').textContent = 
+                now.toLocaleDateString('es-CO', {...options, hour: undefined, minute: undefined, second: undefined});
+            document.getElementById('currentTime').textContent = 
+                now.toLocaleTimeString('es-CO', {timeZone: 'America/Bogota'});
+        }
+
+        // Actualizar cada segundo
+        setInterval(updateColombiaTime, 1000);
+        updateColombiaTime(); // Ejecutar inmediatamente al cargar
     </script>
 </body>
 </html>
