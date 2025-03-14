@@ -236,7 +236,7 @@
                 <label><input type="radio" name="delivery" value="delivery"> Envío a domicilio</label>
             </div>
 
-            <form id="deliveryForm" class="delivery-form">
+            <form id="deliveryForm" class="delivery-form" style="display: none;">
                 <input type="text" id="name" placeholder="Nombre completo" required>
                 <input type="text" id="address" placeholder="Dirección exacta" required>
                 <input type="tel" id="phone" placeholder="Teléfono de contacto" required>
@@ -249,7 +249,7 @@
                 <button onclick="handlePayment()" class="btn-pagar">Pagar con Lightning ⚡</button>
             </div>
 
-            <div id="paymentInstructions" class="payment-instructions">
+            <div id="paymentInstructions" class="payment-instructions" style="display: none;">
                 <p>✅ Total: <strong id="totalCOP">0</strong> COP</p>
                 <p>🔗 Dirección Lightning: <strong>contraentregaco@coinos.io</strong></p>
                 <p>📝 Referencia: <strong id="orderRef">CE-0000</strong></p>
@@ -282,7 +282,7 @@
                 name: "Servicio Contraentrega - Sector Tertulia Oeste",
                 price: 10000,
                 inventory: 1000,
-                image: "https://ejemplo.com/ruta-imagen-1.jpg"
+                image: "https://via.placeholder.com/60"
             },
             {
                 id: 2,
@@ -290,7 +290,7 @@
                 name: "Servicio Contraentrega - Vereda Campo Alegre",
                 price: 10000,
                 inventory: 850,
-                image: "https://ejemplo.com/ruta-imagen-2.jpg"
+                image: "https://via.placeholder.com/60"
             }
         ];
 
@@ -304,13 +304,7 @@
                 <tr>
                     <td>${product.sku}</td>
                     <td><img src="${product.image}" alt="${product.name}" width="60"></td>
-                    <td>
-                        <a href="${product.sku.replace('@', '')}.contraentregaco.com" 
-                           target="_blank" 
-                           class="product-link">
-                            ${product.name}
-                        </a>
-                    </td>
+                    <td>${product.name}</td>
                     <td>$${product.price.toLocaleString('es-CO')}</td>
                     <td>
                         <div class="quantity-controls">
@@ -330,7 +324,7 @@
             const currentQty = cart.get(id) || 0;
             const newQty = Math.max(0, Math.min(currentQty + delta, product.inventory));
             
-            if(newQty > 0) cart.set(id, newQty);
+            if (newQty > 0) cart.set(id, newQty);
             else cart.delete(id);
             
             updateUI();
@@ -346,7 +340,7 @@
         // Resumen de pedido
         function updateSummary() {
             const total = Array.from(cart).reduce((acc, [id, qty]) => 
-                acc + (products.find(p => p.id === id).price * qty, 0);
+                acc + (products.find(p => p.id === id).price * qty), 0);
             
             document.getElementById('orderSummary').textContent = 
                 `Total: $${total.toLocaleString('es-CO')} COP`;
@@ -357,17 +351,17 @@
             const email = document.getElementById('email').value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             
-            if(cart.size === 0) {
+            if (cart.size === 0) {
                 alert('Por favor selecciona al menos un producto');
                 return false;
             }
             
-            if(!emailRegex.test(email)) {
+            if (!emailRegex.test(email)) {
                 alert('Ingresa un correo electrónico válido');
                 return false;
             }
             
-            if(document.querySelector('input[name="delivery"]:checked').value === 'delivery' &&
+            if (document.querySelector('input[name="delivery"]:checked').value === 'delivery' &&
                !document.getElementById('address').value) {
                 alert('Por favor ingresa la dirección de entrega');
                 return false;
@@ -382,38 +376,24 @@
         }
 
         // Manejar pago
-        async function handlePayment() {
-            if(!validateForm()) return;
+        function handlePayment() {
+            if (!validateForm()) return;
             
             currentOrderId = generateOrderId();
             const total = Array.from(cart).reduce((acc, [id, qty]) => 
-                acc + (products.find(p => p.id === id).price * qty, 0);
+                acc + (products.find(p => p.id === id).price * qty), 0);
             
             document.getElementById('totalCOP').textContent = total.toLocaleString('es-CO');
             document.getElementById('orderRef').textContent = currentOrderId;
             
+            // Generar QR solo con la dirección Lightning
             new QRCode(document.getElementById('qrCode'), {
-                text: `lightning:contraentregaco@coinos.io?amount=${total}&memo=${currentOrderId}`,
+                text: `contraentregaco@coinos.io`,
                 width: 200,
                 height: 200
             });
             
             document.getElementById('paymentInstructions').style.display = 'block';
-            
-            try {
-                await fetch('https://formspree.io/f/mnqeyybw', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: document.getElementById('email').value,
-                        orderId: currentOrderId,
-                        total: total,
-                        products: Array.from(cart)
-                    })
-                });
-            } catch (error) {
-                console.error('Error al enviar pedido:', error);
-            }
         }
 
         // Actualizar hora Colombia
