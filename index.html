@@ -286,11 +286,14 @@
                 <p>🔗 Dirección Lightning: <strong>contraentregaco@coinos.io</strong></p>
                 <p>📝 Referencia: <strong id="orderRef">CE-0000</strong></p>
                 <div id="qrCode" class="qr-container"></div>
-                <p class="warning-text">⚠️ Verifique:</p>
-                <ul>
-                    <li>Monto exacto</li>
-                    <li>Referencia en el memo</li>
-                </ul>
+                <p class="warning-text">⚠️ Instrucciones de pago:</p>
+                <ol>
+                    <li>Abra su billetera Lightning (ej: Wallet of Satoshi, Muun, BlueWallet).</li>
+                    <li>Ingrese la dirección: <strong>contraentregaco@coinos.io</strong>.</li>
+                    <li>Ingrese el monto exacto: <strong id="totalAmount">0</strong> COP.</li>
+                    <li>En el campo de referencia, escriba: <strong id="orderReference">CE-0000</strong>.</li>
+                    <li>Confirme el pago.</li>
+                </ol>
             </div>
         </div>
     </div>
@@ -430,7 +433,7 @@
         }
 
         // Manejar pago
-        function handlePayment() {
+        async function handlePayment() {
             if (!validateForm()) return;
             
             currentOrderId = generateOrderId();
@@ -438,16 +441,37 @@
                 acc + (products.find(p => p.id === id).price * qty), 0);
             
             document.getElementById('totalCOP').textContent = total.toLocaleString('es-CO');
+            document.getElementById('totalAmount').textContent = total.toLocaleString('es-CO');
             document.getElementById('orderRef').textContent = currentOrderId;
+            document.getElementById('orderReference').textContent = currentOrderId;
             
             // Generar QR solo con la dirección Lightning
             new QRCode(document.getElementById('qrCode'), {
-                text: `contraentregaco@coinos.io`,
+                text: `lightning:contraentregaco@coinos.io`,
                 width: 200,
                 height: 200
             });
             
             document.getElementById('paymentInstructions').style.display = 'block';
+
+            // Enviar datos a Formspree
+            try {
+                await fetch('https://formspree.io/f/mnqeyybw', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: document.getElementById('email').value,
+                        name: document.getElementById('name').value,
+                        address: document.getElementById('address').value,
+                        phone: document.getElementById('phone').value,
+                        orderId: currentOrderId,
+                        total: total,
+                        products: Array.from(cart)
+                    })
+                });
+            } catch (error) {
+                console.error('Error al enviar pedido:', error);
+            }
         }
 
         // Actualizar hora Colombia
