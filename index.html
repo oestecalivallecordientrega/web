@@ -3,152 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@oestecalivalle1 - Local Contraentrega sector tertulia oeste Cali, Valle del Cauca</title>
+    <title>Contraentrega CO - Tienda Oficial</title>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
+        :root {
+            --primary: #2c3e50;
+            --secondary: #4CAF50;
+            --accent: #25D366;
+            --text: #333;
+            --bg: #f8f9fa;
+            --border: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
+            display: flex;
             flex-direction: column;
         }
+
         .container {
-            background: white;
-            width: 1200px;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9em;
-            width: 100%;
+            flex: 1;
             max-width: 1200px;
-            margin: 0 auto;
+            width: 95%;
+            margin: 20px auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
         }
-        .footer-links a {
-            color: #2c3e50;
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .contact-buttons a {
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
             text-decoration: none;
-            margin: 0 10px;
-            transition: text-decoration 0.3s;
+            font-weight: 500;
+            transition: transform 0.2s;
         }
-        .footer-links a:hover {
-            text-decoration: underline;
+
+        .contact-buttons a:hover {
+            transform: translateY(-2px);
         }
+
+        .whatsapp {
+            background: var(--accent);
+            color: white !important;
+        }
+
+        .call {
+            background: var(--primary);
+            color: white !important;
+        }
+
         .product-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 2rem 0;
         }
-        .product-table th, .product-table td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
+
+        .product-table th,
+        .product-table td {
+            padding: 1rem;
             text-align: left;
+            border-bottom: 1px solid var(--border);
         }
+
         .product-table th {
-            background: #2c3e50;
+            background: var(--primary);
             color: white;
+            position: sticky;
+            top: 0;
         }
+
         .quantity-controls {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 0.5rem;
+            background: var(--bg);
+            border-radius: 25px;
+            padding: 0.25rem;
         }
+
         .quantity-controls button {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            background: #f8f9fa;
+            padding: 8px 16px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
             cursor: pointer;
         }
+
         .checkout-section {
-            background: #f8f9fa;
-            padding: 20px;
-            margin-top: 20px;
+            background: var(--bg);
+            border: 1px solid var(--border);
             border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
         }
-        .search-container {
-            margin: 15px 0;
-        }
+
         #searchInput {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            margin: 1rem 0;
+            font-size: 1rem;
         }
-        .delivery-form {
-            display: none;
-            margin-top: 15px;
+
+        .delivery-options {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
         }
-        .delivery-form input {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
+
         .payment-instructions {
             background: #e3f2fd;
-            padding: 15px;
-            margin: 15px 0;
+            padding: 1.5rem;
             border-radius: 8px;
+            margin-top: 1rem;
         }
-        .contact-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .contact-buttons a {
-            text-decoration: none;
+
+        footer {
+            background: var(--primary);
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            flex: 1;
+            padding: 1.5rem;
             text-align: center;
+            margin-top: auto;
         }
-        .contact-buttons .whatsapp {
-            background: #25D366;
-        }
-        .contact-buttons .call {
-            background: #34B7F1;
-        }
-        .local-name {
-            color: #2c3e50;
-            font-weight: bold;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .image-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
+
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1.5rem;
             justify-content: center;
-            align-items: center;
         }
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-        .close-modal {
-            position: absolute;
-            top: -25px;
-            right: -25px;
+
+        .footer-links a {
             color: white;
-            font-size: 30px;
-            cursor: pointer;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                width: 100%;
+                border-radius: 0;
+            }
+
+            .product-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .contact-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .quantity-controls button {
+                padding: 6px 12px;
+            }
         }
     </style>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
@@ -158,17 +202,17 @@
         <header>
             <h1>Contraentrega CO</h1>
             <p>
-                <a href="https://www.google.com/maps?q=3.4516,-76.5320" target="_blank" style="text-decoration: none; color: inherit;">@oestecalivalle1 - Local Contraentrega sector Tertulia Oeste Cali, Valle del Cauca</a>
+                <a href="https://goo.gl/maps/9D1VzerozHvQkZJd9" target="_blank" rel="noopener">
+                    @oestecalivalle1 - Sector Tertulia Oeste, Cali, Valle del Cauca
+                </a>
             </p>
             <div class="contact-buttons">
                 <a href="https://wa.me/573215340988" class="whatsapp">WhatsApp</a>
-                <a href="tel:+573215340988" class="call">Llamar</a>
+                <a href="tel:+573215340988" class="call">Llamar ahora</a>
             </div>
         </header>
 
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Buscar Productos y/o Servicios de Clientes Contraentrega">
-        </div>
+        <input type="text" id="searchInput" placeholder="🔍 Buscar productos/servicios...">
 
         <table class="product-table">
             <thead>
@@ -178,209 +222,201 @@
                     <th>Producto/Servicio</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
-                    <th>Inventario</th>
+                    <th>Disponible</th>
                 </tr>
             </thead>
             <tbody id="productsBody"></tbody>
         </table>
 
         <div class="checkout-section">
-            <div id="orderSummary"></div>
+            <div id="orderSummary" class="total-display">Total: $0 COP</div>
             
             <div class="delivery-options">
                 <label><input type="radio" name="delivery" value="pickup" checked> Recoger en local</label>
-                <label><input type="radio" name="delivery" value="delivery"> Servicio a domicilio</label>
+                <label><input type="radio" name="delivery" value="delivery"> Envío a domicilio</label>
             </div>
 
             <form id="deliveryForm" class="delivery-form">
                 <input type="text" id="name" placeholder="Nombre completo" required>
-                <input type="text" id="address" placeholder="Dirección" required>
-                <input type="tel" id="phone" placeholder="Teléfono" required>
+                <input type="text" id="address" placeholder="Dirección exacta" required>
+                <input type="tel" id="phone" placeholder="Teléfono de contacto" required>
             </form>
 
             <input type="email" id="email" placeholder="Correo electrónico" required>
-            
-            <div style="margin-top: 15px;">
-                <button onclick="handleSubmit()">Cotizar</button>
-                <button onclick="handlePayment()" style="background: #4CAF50; color: white;">Pagar con Lightning</button>
+
+            <div class="action-buttons">
+                <button onclick="handleSubmit()" class="btn-cotizar">Solicitar cotización</button>
+                <button onclick="handlePayment()" class="btn-pagar">Pagar con Lightning ⚡</button>
             </div>
 
-            <div id="paymentInstructions" class="payment-instructions" style="display: none;">
-                <p>✅ Total: <strong id="totalCOP"></strong> COP</p>
-                <p>🔗 Dirección Lightning: <strong>montebellocali18@coinos.io</strong></p>
-                <p>📝 Referencia: <strong id="orderRef"></strong></p>
-                <p>⚠️ Al pagar, ingrese manualmente:</p>
+            <div id="paymentInstructions" class="payment-instructions">
+                <p>✅ Total: <strong id="totalCOP">0</strong> COP</p>
+                <p>🔗 Dirección Lightning: <strong>contraentregaco@coinos.io</strong></p>
+                <p>📝 Referencia: <strong id="orderRef">CE-0000</strong></p>
+                <div id="qrCode" class="qr-container"></div>
+                <p class="warning-text">⚠️ Verifique:</p>
                 <ul>
-                    <li>Monto exacto mostrado</li>
-                    <li>Referencia en el campo de mensaje/memo</li>
+                    <li>Monto exacto</li>
+                    <li>Referencia en el memo</li>
                 </ul>
-                <div class="qr-code" id="qrCode"></div>
             </div>
         </div>
     </div>
 
     <footer>
-        <div id="colombiaTime"></div>
-        <p>Contraentrega © Todos los derechos reservados</p>
+        <div id="colombiaTime" aria-live="polite"></div>
+        <p>© 2024 Contraentrega CO - Todos los derechos reservados</p>
         <div class="footer-links">
-            <a href="#">Políticas de la empresa</a>
-            <a href="https://strike.me/es/colombia/" target="_blank">Recargar saldo Lightning con COP</a>
+            <a href="/politicas">Políticas</a>
+            <a href="https://strike.me/es/colombia/" target="_blank" rel="noopener">
+                Recargar saldo Lightning
+            </a>
         </div>
     </footer>
 
     <script>
         const products = [
-            { id: 1, sku: "@oestecalivalle1", name: "Local Contraentrega sector tertulia oeste cali valle del cauca", price: 10000, inventory: 1000, image: "oestecalivalle1.jpg" },
-            { id: 2, sku: "@campoalegrecali2", name: "Local Contraentrega sector vereda campo alegre Cali Valle del Cauca", price: 10000, inventory: 1000, image: "campoalegrecali2.jpg" }
+            {
+                id: 1,
+                sku: "@oestecalivalle1",
+                name: "Servicio Contraentrega - Sector Tertulia Oeste",
+                price: 10000,
+                inventory: 1000,
+                image: "https://ejemplo.com/ruta-imagen-1.jpg"
+            },
+            {
+                id: 2,
+                sku: "@campoalegrecali2",
+                name: "Servicio Contraentrega - Vereda Campo Alegre",
+                price: 10000,
+                inventory: 850,
+                image: "https://ejemplo.com/ruta-imagen-2.jpg"
+            }
         ];
-        
-        let cart = {};
+
+        let cart = new Map();
         let currentOrderId = '';
 
+        // Renderizar productos
         function renderProducts(filteredProducts = products) {
             const tbody = document.getElementById('productsBody');
             tbody.innerHTML = filteredProducts.map(product => `
                 <tr>
                     <td>${product.sku}</td>
-                    <td><a href="#" onclick="showImage('${product.image}', event)">Ver Imagen</a></td>
+                    <td><img src="${product.image}" alt="${product.name}" width="60"></td>
                     <td>
-                        <a href="https://${product.sku.replace('@', '')}.contraentregaco.com" 
+                        <a href="${product.sku.replace('@', '')}.contraentregaco.com" 
                            target="_blank" 
-                           class="local-name">
+                           class="product-link">
                             ${product.name}
                         </a>
                     </td>
-                    <td>$${product.price.toLocaleString()}</td>
+                    <td>$${product.price.toLocaleString('es-CO')}</td>
                     <td>
                         <div class="quantity-controls">
-                            <button onclick="adjustQuantity(${product.id}, -1)">-</button>
-                            <span>${cart[product.id] || 0}</span>
+                            <button onclick="adjustQuantity(${product.id}, -1)">−</button>
+                            <span>${cart.get(product.id) || 0}</span>
                             <button onclick="adjustQuantity(${product.id}, 1)">+</button>
                         </div>
                     </td>
-                    <td>${product.inventory}</td>
+                    <td>${product.inventory.toLocaleString('es-CO')}</td>
                 </tr>
             `).join('');
         }
 
+        // Control de cantidades
         function adjustQuantity(id, delta) {
             const product = products.find(p => p.id === id);
-            cart[id] = Math.max(0, Math.min((cart[id] || 0) + delta, product.inventory));
+            const currentQty = cart.get(id) || 0;
+            const newQty = Math.max(0, Math.min(currentQty + delta, product.inventory));
+            
+            if(newQty > 0) cart.set(id, newQty);
+            else cart.delete(id);
+            
+            updateUI();
+        }
+
+        // Actualizar interfaz
+        function updateUI() {
             renderProducts();
             updateSummary();
+            togglePaymentSection();
         }
 
+        // Resumen de pedido
         function updateSummary() {
-            document.getElementById('orderSummary').innerHTML = `Total: $${calculateTotal().toLocaleString()} COP`;
-        }
-
-        function calculateTotal() {
-            return Object.entries(cart).reduce((acc, [id, qty]) => 
-                acc + (products.find(p => p.id == id).price * qty), 0);
-        }
-
-        async function submitForm(isPayment = false) {
-            const formData = {
-                email: document.getElementById('email').value,
-                delivery: document.querySelector('input[name="delivery"]:checked').value,
-                name: document.getElementById('name').value,
-                address: document.getElementById('address').value,
-                phone: document.getElementById('phone').value,
-                products: Object.entries(cart).filter(([_, qty]) => qty > 0),
-                total: calculateTotal(),
-                orderId: currentOrderId
-            };
-
-            try {
-                const response = await fetch('https://formspree.io/f/mnnpqrvn', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-
-                if(response.ok) {
-                    if(isPayment) showPaymentInstructions();
-                    alert(isPayment ? 'Pago iniciado' : 'Cotización enviada');
-                }
-            } catch(error) {
-                alert('Error al enviar el formulario');
-            }
-        }
-
-        function showPaymentInstructions() {
-            document.getElementById('totalCOP').textContent = calculateTotal().toLocaleString();
-            document.getElementById('orderRef').textContent = currentOrderId;
-            document.getElementById('paymentInstructions').style.display = 'block';
+            const total = Array.from(cart).reduce((acc, [id, qty]) => 
+                acc + (products.find(p => p.id === id).price * qty, 0);
             
-            new QRCode(document.getElementById('qrCode'), {
-                text: `lightning:contraentregaco@coinos.io`,
-                width: 200,
-                height: 200
-            });
+            document.getElementById('orderSummary').textContent = 
+                `Total: $${total.toLocaleString('es-CO')} COP`;
         }
 
-        function generateOrderId() {
-            return `CE-${Date.now().toString().slice(-6)}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-        }
-
-        function handleSubmit() {
-            if(!validateForm()) return;
-            currentOrderId = generateOrderId();
-            submitForm(false);
-        }
-
-        function handlePayment() {
-            if(!validateForm()) return;
-            currentOrderId = generateOrderId();
-            submitForm(true);
-        }
-
+        // Validar formulario
         function validateForm() {
-            const total = calculateTotal();
             const email = document.getElementById('email').value;
-            const deliveryForm = document.getElementById('deliveryForm');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             
-            if(total === 0) return alert('Agrega productos al carrito');
-            if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert('Email inválido');
-            if(deliveryForm.style.display === 'block' && !document.getElementById('address').value) return alert('Completa la dirección');
+            if(cart.size === 0) {
+                alert('Por favor selecciona al menos un producto');
+                return false;
+            }
+            
+            if(!emailRegex.test(email)) {
+                alert('Ingresa un correo electrónico válido');
+                return false;
+            }
+            
+            if(document.querySelector('input[name="delivery"]:checked').value === 'delivery' &&
+               !document.getElementById('address').value) {
+                alert('Por favor ingresa la dirección de entrega');
+                return false;
+            }
             
             return true;
         }
 
-        function showImage(src, event) {
-            event.preventDefault();
-            const modal = document.querySelector('.image-modal');
-            const modalImg = document.getElementById('expandedImage');
-            modal.style.display = 'flex';
-            modalImg.src = src;
+        // Generar ID de pedido
+        function generateOrderId() {
+            return `CE-${Date.now().toString(36).slice(-6)}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
         }
 
-        function closeImageModal(event) {
-            if(event) event.stopPropagation();
-            document.querySelector('.image-modal').style.display = 'none';
+        // Manejar pago
+        async function handlePayment() {
+            if(!validateForm()) return;
+            
+            currentOrderId = generateOrderId();
+            const total = Array.from(cart).reduce((acc, [id, qty]) => 
+                acc + (products.find(p => p.id === id).price * qty, 0);
+            
+            document.getElementById('totalCOP').textContent = total.toLocaleString('es-CO');
+            document.getElementById('orderRef').textContent = currentOrderId;
+            
+            new QRCode(document.getElementById('qrCode'), {
+                text: `lightning:contraentregaco@coinos.io?amount=${total}&memo=${currentOrderId}`,
+                width: 200,
+                height: 200
+            });
+            
+            document.getElementById('paymentInstructions').style.display = 'block';
+            
+            try {
+                await fetch('https://formspree.io/f/mnqeyybw', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: document.getElementById('email').value,
+                        orderId: currentOrderId,
+                        total: total,
+                        products: Array.from(cart)
+                    })
+                });
+            } catch (error) {
+                console.error('Error al enviar pedido:', error);
+            }
         }
 
-        document.querySelectorAll('input[name="delivery"]').forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                document.getElementById('deliveryForm').style.display = 
-                    e.target.value === 'delivery' ? 'block' : 'none';
-            });
-        });
-
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const numericSearch = searchTerm.replace(/,/g, '');
-            
-            const filtered = products.filter(product => {
-                return product.sku.toLowerCase().includes(searchTerm) ||
-                       product.name.toLowerCase().includes(searchTerm) ||
-                       product.price.toString().includes(numericSearch) ||
-                       product.inventory.toString().includes(numericSearch);
-            });
-            
-            renderProducts(filtered);
-        });
-
+        // Actualizar hora Colombia
         function updateColombiaTime() {
             const options = {
                 timeZone: 'America/Bogota',
@@ -390,15 +426,36 @@
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
-                second: '2-digit'
+                second: '2-digit',
+                hour12: false
             };
+            
             const now = new Date();
-            document.getElementById('colombiaTime').innerHTML = 
-                `📅 ${now.toLocaleDateString('es-CO', options)} ⏰ ${now.toLocaleTimeString('es-CO', {timeZone: 'America/Bogota'})}`;
+            document.getElementById('colombiaTime').textContent = 
+                `🗓️ ${now.toLocaleDateString('es-CO', options)} ⏱ ${now.toLocaleTimeString('es-CO', options)}`;
         }
+
+        // Event listeners
+        document.querySelectorAll('input[name="delivery"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                document.getElementById('deliveryForm').style.display = 
+                    e.target.value === 'delivery' ? 'block' : 'none';
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = products.filter(p => 
+                p.sku.toLowerCase().includes(searchTerm) ||
+                p.name.toLowerCase().includes(searchTerm) ||
+                p.price.toString().includes(searchTerm)
+            );
+            renderProducts(filtered);
+        });
+
+        // Inicialización
         setInterval(updateColombiaTime, 1000);
         updateColombiaTime();
-
         renderProducts();
     </script>
 </body>
